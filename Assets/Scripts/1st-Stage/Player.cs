@@ -50,7 +50,8 @@ public class Player : MonoBehaviour
             // animator.SetFloat("Speed", x);
         }
         
-        if (Input.GetKeyDown("space"))
+        // if (Input.GetKey("space")) // Adding force many times
+        if (Input.GetKeyDown("space")) // once
         {
             Jump();
         }
