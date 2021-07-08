@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private Animator animator;
     private float speed = 0;
-    private float jumpPower = 1200;
+    private float jumpPower = 900;
     
     // Start is called before the first frame update
     void Start()
@@ -118,12 +119,23 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Game Over...");
             gameManagerScript1st.GameOver();
+            // Restart();
+            Invoke("Restart", 1.5f); // Exec function() 1.5s later 
         }
         else if(other.gameObject.tag == "Goal")
         {
             Debug.Log("Goal!!");
             gameManagerScript1st.Goal();
+            // Restart();
+            Invoke("Restart", 1.5f);
         }
         // throw new NotImplementedException();
+    }
+
+    void Restart()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        // SceneManager.LoadScene(currentScene);
+        SceneManager.LoadScene(currentScene.name);
     }
 }

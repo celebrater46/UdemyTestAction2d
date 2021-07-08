@@ -212,7 +212,6 @@ GameObject:
   m_Component:
   - component: {fileID: 424050105}
   - component: {fileID: 424050104}
-  - component: {fileID: 424050103}
   m_Layer: 0
   m_Name: DeathZone
   m_TagString: GameOver
@@ -220,18 +219,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &424050103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424050102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4051993cf4cf1d4197a096129d9a5b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &424050104
 BoxCollider2D:
   m_ObjectHideFlags: 0
