@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public LayerMask groundLayer;
     public enum DIRECTION_TYPE
     {
         STOP,
@@ -51,7 +52,8 @@ public class Player : MonoBehaviour
         }
         
         // if (Input.GetKey("space")) // Adding force many times
-        if (Input.GetKeyDown("space")) // once
+        // if (Input.GetKeyDown("space")) // once
+        if (IsGround() && Input.GetKeyDown("space")) // once and when on ground
         {
             Jump();
         }
@@ -85,5 +87,22 @@ public class Player : MonoBehaviour
     {
         // Add force upward
         rigidbody2D.AddForce(Vector2.up * jumpPower);
+    }
+
+    private bool IsGround()
+    {
+        // Create Start point and End point of the arrow
+        Vector3 leftStartPoint = transform.position - Vector3.right * 0.2f;
+        Vector3 rightStartPoint = transform.position + Vector3.right * 0.2f;
+        Vector3 endPoint = transform.position - Vector3.up * 0.1f;
+        
+        // Display the arrows to debug
+        Debug.DrawLine(leftStartPoint, endPoint);
+        Debug.DrawLine(rightStartPoint, endPoint);
+    
+        // V Linecast means judgement of collision (start, end, target)
+        // V return true if follow conditions
+        return Physics2D.Linecast(leftStartPoint, endPoint, groundLayer)
+            || Physics2D.Linecast(rightStartPoint, endPoint, groundLayer);
     }
 }

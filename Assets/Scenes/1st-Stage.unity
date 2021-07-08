@@ -287,6 +287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15f03afd281fdf4caf04790e7b6d7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1074701607
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +304,7 @@ GameObject:
   - component: {fileID: 1074701613}
   - component: {fileID: 1074701612}
   - component: {fileID: 1074701611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
