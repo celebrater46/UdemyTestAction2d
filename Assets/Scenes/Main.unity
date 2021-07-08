@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleObj: {fileID: 725612632}
+  titleText: {fileID: 0}
 --- !u!4 &1919059899
 Transform:
   m_ObjectHideFlags: 0
