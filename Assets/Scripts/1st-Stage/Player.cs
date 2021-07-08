@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private Animator animator;
     private float speed = 0;
-    private float jumpPower = 400;
+    private float jumpPower = 1200;
     
     // Start is called before the first frame update
     void Start()
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * jumpPower);
     }
 
-    bool IsGround()
+    private bool IsGround()
     {
         // Create Start point and End point of the arrow
         Vector3 leftStartPoint = transform.position - Vector3.right * 0.2f;
@@ -105,5 +106,19 @@ public class Player : MonoBehaviour
         // return true; // Test
         return Physics2D.Linecast(leftStartPoint, endPoint, groundLayer)
             || Physics2D.Linecast(rightStartPoint, endPoint, groundLayer);
+    }
+
+    // When be into Death Zone (Game Over)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "GameOver")
+        {
+            Debug.Log("Game Over...");
+        }
+        else if(other.gameObject.tag == "Goal")
+        {
+            Debug.Log("Goal!!");
+        }
+        // throw new NotImplementedException();
     }
 }
