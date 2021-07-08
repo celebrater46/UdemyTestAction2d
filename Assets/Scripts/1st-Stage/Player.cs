@@ -7,6 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public LayerMask groundLayer;
+    public GameManagerScript1st gameManagerScript1st;
+    
     public enum DIRECTION_TYPE
     {
         STOP,
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        // gameManager = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -114,10 +117,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "GameOver")
         {
             Debug.Log("Game Over...");
+            gameManagerScript1st.GameOver();
         }
         else if(other.gameObject.tag == "Goal")
         {
             Debug.Log("Goal!!");
+            gameManagerScript1st.Goal();
         }
         // throw new NotImplementedException();
     }
