@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             || Physics2D.Linecast(rightStartPoint, endPoint, groundLayer);
     }
 
-    // When be into Death Zone (Game Over)
+    // When the player strikes against something
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "GameOver")
@@ -128,6 +128,13 @@ public class Player : MonoBehaviour
             gameManagerScript1st.Goal();
             // Restart();
             Invoke("Restart", 1.5f);
+        } 
+        else if (other.gameObject.tag == "Item")
+        {
+            // Getting Item
+            Debug.Log("You got an item!");
+            // other.gameObject.GetComponent<ItemManager>().GetItem; // <- Compile Error Occurred: Only assignment, call, increment, decrement, await expression, and new object expressions can be used as a statement. To sum up, FUNCTION NEEDS "()"!! STUPID.
+            other.gameObject.GetComponent<ItemManager>().GetItem();
         }
         // throw new NotImplementedException();
     }
