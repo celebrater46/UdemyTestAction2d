@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * jumpPower);
     }
 
-    private bool IsGround()
+    bool IsGround()
     {
         // Create Start point and End point of the arrow
         Vector3 leftStartPoint = transform.position - Vector3.right * 0.2f;
@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
     
         // V Linecast means judgement of collision (start, end, target)
         // V return true if follow conditions
+        // return true; // Test
         return Physics2D.Linecast(leftStartPoint, endPoint, groundLayer)
             || Physics2D.Linecast(rightStartPoint, endPoint, groundLayer);
     }
