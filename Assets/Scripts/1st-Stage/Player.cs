@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private Animator animator;
     private float speed = 0;
     private float jumpPower = 900;
+    // private string jumpKey = "space";
+    private string jumpKey = "joystick button 0";
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
         if (x == 0)
         {
             // Stopping
@@ -58,9 +61,19 @@ public class Player : MonoBehaviour
         
         // if (Input.GetKey("space")) // Adding force many times
         // if (Input.GetKeyDown("space")) // once
-        if (IsGround() && Input.GetKeyDown("space")) // once and when on ground
+        // if (IsGround() && Input.GetKeyDown("space")) // once and when on ground
+        if (IsGround()) // once and when on ground
         {
-            Jump();
+            if (Input.GetKeyDown(jumpKey))
+            // if (Input.GetKeyDown(jumpKey) || y > 0)
+            {
+                Jump();
+            }
+        }
+        
+        if (Input.anyKeyDown)
+        {
+            ShowKeyCode();
         }
     }
 
@@ -144,5 +157,21 @@ public class Player : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         // SceneManager.LoadScene(currentScene);
         SceneManager.LoadScene(currentScene.name);
+    }
+
+    private void ShowKeyCode()
+    {
+        // 入力されたキー名
+        // string keyStr = Input.inputString;
+        // Debug.Log(keyStr);
+            
+        foreach(KeyCode code in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKeyDown(code))
+            {
+                // 入力されたキー名を表示
+                Debug.Log(code.ToString());
+            }
+        }
     }
 }
