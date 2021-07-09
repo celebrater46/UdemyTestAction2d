@@ -87,12 +87,12 @@ public class Player : MonoBehaviour
                 // animator.SetBool("isRunning", false);
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 8;
+                speed = 5;
                 // animator.SetBool("isRunning", true);
                 transform.localScale = new Vector3(1, 1, 1); // Not Vector2
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -8;
+                speed = -5;
                 // animator.SetBool("isRunning", true);
                 transform.localScale = new Vector3(-1, 1, 1);
                 break;
@@ -149,6 +149,26 @@ public class Player : MonoBehaviour
             Debug.Log("You got an item!");
             // other.gameObject.GetComponent<ItemManager>().GetItem; // <- Compile Error Occurred: Only assignment, call, increment, decrement, await expression, and new object expressions can be used as a statement. To sum up, FUNCTION NEEDS "()"!! STUPID.
             other.gameObject.GetComponent<ItemManager>().GetItem();
+        }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            // Getting Enemy
+            EnemyManager enemy = other.gameObject.GetComponent<EnemyManager>();
+            
+            if (this.transform.position.y + 0.2f > enemy.transform.position.y)
+            {
+                // On Enemy
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0); // stop falling of the player when tread the enemy
+                Jump();
+                enemy.DestroyEnemy();
+            }
+            else
+            {
+                // Destroy(this.gameObject); // If destroy this object, Restart will not work.
+                this.gameObject.SetActive(false); // disappear
+                gameManagerScript1st.GameOver();
+                Invoke("Restart", 1.5f);
+            }
         }
         // throw new NotImplementedException();
     }

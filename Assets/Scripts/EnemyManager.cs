@@ -45,12 +45,12 @@ public class EnemyManager : MonoBehaviour
                 // animator.SetBool("isRunning", false);
                 break;
             case DIRECTION_TYPE.RIGHT:
-                speed = 8;
+                speed = 3;
                 // animator.SetBool("isRunning", true);
                 transform.localScale = new Vector3(1, 1, 1); // Not Vector2
                 break;
             case DIRECTION_TYPE.LEFT:
-                speed = -8;
+                speed = -3;
                 // animator.SetBool("isRunning", true);
                 transform.localScale = new Vector3(-1, 1, 1);
                 break;
@@ -88,5 +88,10 @@ public class EnemyManager : MonoBehaviour
             direction = DIRECTION_TYPE.RIGHT;
         }
         // Debug.Log(transform.name + ": " + IsGround());
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(this.gameObject);
     }
 }
