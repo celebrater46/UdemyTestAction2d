@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     private Animator animator;
     private float speed = 0;
     private float jumpPower = 900;
-    // private string jumpKey = "space";
-    private string jumpKey = "joystick button 0";
+    private string jumpKey = "space";
+    private string jumpKey2 = "joystick button 0";
     
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         // if (IsGround() && Input.GetKeyDown("space")) // once and when on ground
         if (IsGround()) // once and when on ground
         {
-            if (Input.GetKeyDown(jumpKey))
+            if (Input.GetKeyDown(jumpKey) || Input.GetKeyDown(jumpKey2))
             // if (Input.GetKeyDown(jumpKey) || y > 0)
             {
                 Jump();
@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         {
             ShowKeyCode();
         }
+        Debug.Log(transform.name + ": " + IsGround());
     }
 
     private void FixedUpdate()
