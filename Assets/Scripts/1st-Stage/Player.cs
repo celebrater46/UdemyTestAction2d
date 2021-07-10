@@ -69,6 +69,10 @@ public class Player : MonoBehaviour
             {
                 Jump();
             }
+            else
+            {
+                animator.SetBool("isJumping", false);
+            }
         }
         
         if (Input.anyKeyDown)
@@ -106,6 +110,7 @@ public class Player : MonoBehaviour
     {
         // Add force upward
         rigidbody2D.AddForce(Vector2.up * jumpPower);
+        animator.SetBool("isJumping", true);
     }
 
     private bool IsGround()
