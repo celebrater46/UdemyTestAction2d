@@ -168,6 +168,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  deathEffect: {fileID: 2422089552340446020, guid: fae13ac18eb213b4e8182b55e7dab37d, type: 3}
 --- !u!58 &1864972879357199802
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public LayerMask groundLayer;
+    public GameObject deathEffect;
     
     public enum DIRECTION_TYPE
     {
@@ -92,6 +93,7 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy()
     {
+        Instantiate(deathEffect, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 }
