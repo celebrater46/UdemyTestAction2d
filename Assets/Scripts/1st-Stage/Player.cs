@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float jumpPower = 900;
     private string jumpKey = "space";
     private string jumpKey2 = "joystick button 0";
+    private bool isDead = false;
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         if (x == 0)
@@ -84,6 +89,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDead)
+        {
+            return;
+        }
         switch (direction)
         {
             case DIRECTION_TYPE.STOP:
@@ -134,12 +143,17 @@ public class Player : MonoBehaviour
     // When the player strikes against something
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (isDead)
+        {
+            return;
+        }
         if (other.gameObject.tag == "GameOver")
         {
-            Debug.Log("Game Over...");
-            gameManagerScript1st.GameOver();
+            // Debug.Log("Game Over...");
+            // gameManagerScript1st.GameOver();
             // Restart();
-            Invoke("Restart", 1.5f); // Exec function() 1.5s later 
+            // Invoke("Restart", 1.5f); // Exec function() 1.5s later 
+            PlayerDeath();
         }
         else if(other.gameObject.tag == "Goal")
         {
@@ -170,9 +184,10 @@ public class Player : MonoBehaviour
             else
             {
                 // Destroy(this.gameObject); // If destroy this object, Restart will not work.
-                this.gameObject.SetActive(false); // disappear
-                gameManagerScript1st.GameOver();
-                Invoke("Restart", 1.5f);
+                // this.gameObject.SetActive(false); // disappear
+                // gameManagerScript1st.GameOver();
+                // Invoke("Restart", 1.5f);
+                PlayerDeath();
             }
         }
         // throw new NotImplementedException();
@@ -199,5 +214,17 @@ public class Player : MonoBehaviour
                 Debug.Log(code.ToString());
             }
         }
+    }
+
+    private void PlayerDeath()
+    {
+        isDead = true;
+        rigidbody2D.velocity = new Vector2(0, 0);
+        rigidbody2D.AddForce(Vector2.up * jumpPower);
+        animator.Play("PlayerDeathAnimation");
+        BoxCollider2D boxColider2D = GetComponent<BoxCollider2D>();
+        Destroy(boxColider2D); //
+        gameManagerScript1st.GameOver();
+        Invoke("Restart", 1.5f);
     }
 }
