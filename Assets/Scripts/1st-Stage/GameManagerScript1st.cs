@@ -11,10 +11,16 @@ public class GameManagerScript1st : MonoBehaviour
     private const int MAX_SCORE = 9999;
     private int score = 0;
     
+    // SE
+    public AudioClip gameClearSe;
+    public AudioClip gameOverSe;
+    private AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreText.text = score.ToString();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,11 +32,13 @@ public class GameManagerScript1st : MonoBehaviour
     public void GameOver()
     {
         gameOverText.SetActive(true);
+        audioSource.PlayOneShot(gameOverSe); // play once
     }
 
     public void Goal()
     {
         goalText.SetActive(true);
+        audioSource.PlayOneShot(gameClearSe);
     }
 
     // public void addScore() // Not good. Obey Coding regulation that function name's first character is Capital Letter

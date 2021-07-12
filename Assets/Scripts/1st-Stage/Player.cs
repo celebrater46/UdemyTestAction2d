@@ -27,11 +27,18 @@ public class Player : MonoBehaviour
     private string jumpKey2 = "joystick button 0";
     private bool isDead = false;
     
+    // SE
+    public AudioClip getItemSe;
+    public AudioClip killEnemySe;
+    public AudioClip jumpSe;
+    private AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         // gameManager = GetComponent<GameManager>();
     }
 
@@ -72,6 +79,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(jumpKey) || Input.GetKeyDown(jumpKey2))
             // if (Input.GetKeyDown(jumpKey) || y > 0)
             {
+                // audioSource.PlayOneShot(jumpSe);
                 Jump();
             }
             else
@@ -120,6 +128,7 @@ public class Player : MonoBehaviour
         // Add force upward
         rigidbody2D.AddForce(Vector2.up * jumpPower);
         animator.SetBool("isJumping", true);
+        audioSource.PlayOneShot(jumpSe);
     }
 
     private bool IsGround()
@@ -168,6 +177,7 @@ public class Player : MonoBehaviour
             Debug.Log("You got an item!");
             // other.gameObject.GetComponent<ItemManager>().GetItem; // <- Compile Error Occurred: Only assignment, call, increment, decrement, await expression, and new object expressions can be used as a statement. To sum up, FUNCTION NEEDS "()"!! STUPID.
             other.gameObject.GetComponent<ItemManager>().GetItem();
+            audioSource.PlayOneShot(getItemSe);
         }
         else if (other.gameObject.tag == "Enemy")
         {
@@ -179,6 +189,8 @@ public class Player : MonoBehaviour
                 // On Enemy
                 rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0); // stop falling of the player when tread the enemy
                 Jump();
+                audioSource.PlayOneShot(killEnemySe);
+                
                 enemy.DestroyEnemy();
             }
             else
